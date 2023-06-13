@@ -12,6 +12,7 @@ import { HeaderUserComponent } from './frontoffice/header-user/header-user.compo
 import { BodyUserComponent } from './frontoffice/body-user/body-user.component';
 import { AllTemplateUserComponent } from './frontoffice/all-template-user/all-template-user.component';
 import { FooterUserComponent } from './frontoffice/footer-user/footer-user.component';
+import { ActiviteAdminComponent } from './backoffice/activite-admin/activite-admin.component';
 
 @NgModule({
   declarations: [
@@ -24,7 +25,8 @@ import { FooterUserComponent } from './frontoffice/footer-user/footer-user.compo
     HeaderUserComponent,
     BodyUserComponent,
     AllTemplateUserComponent,
-    FooterUserComponent
+    FooterUserComponent,
+    ActiviteAdminComponent
   ],
   imports: [
     BrowserModule,
