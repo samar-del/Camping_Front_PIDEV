@@ -1,0 +1,117 @@
+<div class="container">
+  <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+    <h2 class="h2">Posts List</h2>
+  </div>
+
+  <button class="btn btn-round btn-sm btn-success" (click)="open(mymodal1)">Add new Post</button>
+  <br><br>
+  <ng-template #mymodal1 let-modal1>
+    <div class="modal-header">
+      <h4 class="modal-title" id="modal-basic-title" >Add new Post</h4>
+      <button type="button" class="close" aria-label="Close" (click)="modal1.dismiss('Cross click')">
+        <span aria-hidden="true" (click)="cancel()">×</span>
+      </button>
+
+    </div>
+    <div class="center">
+      <form>
+        <div class="form-group row">
+          <div class="col-md-12">
+            <input type="text" class="form-control" placeholder="Titre Post" [(ngModel)]="post.title" [ngModelOptions]="{ standalone: true }">
+          </div>
+        </div>
+        <div class="form-group row">
+          <div class="col-md-12">
+            <input type="text" class="form-control" placeholder="Description" [(ngModel)]="post.description" [ngModelOptions]="{ standalone: true }">
+          </div>
+        </div>
+        <div class="form-group row">
+          <div class="col-md-12">
+            <input type="date" class="form-control" placeholder="Date Post" [(ngModel)]="post.date" [ngModelOptions]="{ standalone: true }">
+          </div>
+        </div>
+
+        <br>
+
+        <button type="button" class="btn btn-success" (click)="addPost(post)" (click)="modal1.close('Save click')">Post!</button>
+        <button type="button" class="btn btn-info" (click)="modal1.close('Save click')">Cancel</button>
+      </form>
+
+
+    </div>
+  </ng-template>
+
+
+
+
+
+  <div class="table-responsive">
+    <table class="table table-bordered">
+      <thead>
+      <tr>
+        <th scope="col">Id</th>
+        <th scope="col">Titre</th>
+        <th scope="col">Description</th>
+        <th scope="col">Date</th>
+        <th class="text-center" scope="col">Action</th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr *ngFor="let post of listPosts; let i = index">
+        <th scope="row">{{post.idPost}}</th>
+        <td>{{post.title}}</td>
+        <td>{{post.description}}</td>
+        <td>{{post.date}}</td>
+
+        <td class="text-center">
+          <button type="button" class="btn btn-outline-primary"
+                  (click)="open(mymodal)">edit</button>
+          <ng-template #mymodal let-modal>
+            <div class="modal-header">
+              <h4 class="modal-title" id="modal-basic-title">Edit</h4>
+              <button type="button" class="close" aria-label="Close"
+                      (click)="modal.dismiss('Cross click')">
+                <span aria-hidden="true" (click)="cancel()">×</span>
+
+              </button>
+
+            </div>
+            <div>
+              <form>
+                <div class="modal-body">
+                  <div class="row" class="col-md-5">
+                    <input type="number" [(ngModel)]="post.idPost" [ngModelOptions]="{standalone : true}" hidden />
+                  </div>
+                  <div class="row" class="col-md-5">
+                    <label>Titre</label>
+                    <input type="text" [(ngModel)]="post.title" [ngModelOptions]="{standalone : true}" />
+                  </div>
+                  <div class="row" class="col-md-5">
+                    <label>Description</label>
+                    <input type="text" [(ngModel)]="post.description" [ngModelOptions]="{standalone : true}" />
+                  </div>
+                  <div class="row" class="col-md-5">
+                    <label>Date Post</label>
+                    <input type="Date" [(ngModel)]="post.date" [ngModelOptions]="{standalone : true}" />
+                  </div>
+
+
+                  <div class="modal-footer">
+
+                    <button type="button" class="btn btn-info"
+                            (click)="modal.close('Save click')" (click)="cancel()">Cancel</button>
+                    <button class="btn btn-success"(click)="updatePost(post)" (click)="modal.close('Save click')">Confirm</button>
+                  </div>
+                </div>
+              </form>
+            </div>
+          </ng-template>
+
+
+        <td class="text-center">
+          <button class="btn btn-sm btn-danger" (click)="deletePost(post.idPost)">Delete</button>
+      </tr>
+      </tbody>
+    </table>
+  </div>
+</div>

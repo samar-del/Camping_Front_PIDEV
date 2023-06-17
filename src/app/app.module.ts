@@ -15,6 +15,8 @@ import { ActiviteAdminComponent } from './backoffice/activite-admin/activite-adm
 import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import {HttpClientModule} from "@angular/common/http";
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { PostAdminComponent } from './backoffice/post-admin/post-admin.component';
+
 
 @NgModule({
   declarations: [
@@ -28,7 +30,8 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
     BodyUserComponent,
     AllTemplateUserComponent,
     FooterUserComponent,
-    ActiviteAdminComponent
+    ActiviteAdminComponent,
+    PostAdminComponent
   ],
   imports: [
     BrowserModule,
