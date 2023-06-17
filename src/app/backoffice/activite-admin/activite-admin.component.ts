@@ -11,10 +11,9 @@ import {Router} from "@angular/router";
   styleUrls: ['./activite-admin.component.scss']
 })
 export class ActiviteAdminComponent implements OnInit {
-
+  activite: Activite = new Activite();
   listActivites :any = [];
   form : boolean = false;
-  activite!: Activite;
   closeResult! : string;
 
   constructor(private activiteService : CrudActiviteService,
@@ -32,11 +31,22 @@ export class ActiviteAdminComponent implements OnInit {
     this.activiteService.getAllActivites().subscribe(res => this.listActivites = res)
   }
 
-  addActivite(activite: any, idLieu:any){
-    this.activiteService.addActivite(activite,idLieu).subscribe(() => {
-      this.activiteService.getAllActivites();
+  addActivite(activite: any){
+    this.activiteService.addActivite(activite).subscribe(() => {
+      this.getAllActivites();
       this.form = false;
     });
+  }
+
+  //addActivite(activite: any, idLieu:any){
+  //  this.activiteService.addActivite(activite,idLieu).subscribe(() => {
+   //   this.activiteService.getAllActivites();
+    //  this.form = false;
+  //  });
+  //}
+
+  editActivite(activite : Activite){
+    this.activiteService.editActivite(activite).subscribe();
   }
 
   deleteActivite(idActivite : any){

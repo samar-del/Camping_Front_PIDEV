@@ -5,7 +5,4 @@ export class Activite {
   image!: string;
   date_deb!: Date;
   date_fin!: Date;
-  //reservations!: Reservation[];
-  //posts!: Post[];
-  //lieuActivite!: LieuDeCamping;
 }
