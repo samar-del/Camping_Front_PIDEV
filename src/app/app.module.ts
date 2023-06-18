@@ -16,6 +16,7 @@ import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import {HttpClientModule} from "@angular/common/http";
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { PostAdminComponent } from './backoffice/post-admin/post-admin.component';
+import { ForumCommentAdminComponent } from './backoffice/forum-comment-admin/forum-comment-admin.component';
 
 
 @NgModule({
@@ -31,7 +32,8 @@ import { PostAdminComponent } from './backoffice/post-admin/post-admin.component
     AllTemplateUserComponent,
     FooterUserComponent,
     ActiviteAdminComponent,
-    PostAdminComponent
+    PostAdminComponent,
+    ForumCommentAdminComponent
   ],
   imports: [
     BrowserModule,

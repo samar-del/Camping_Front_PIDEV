@@ -6,6 +6,7 @@ import {AllTemplateUserComponent} from "./frontoffice/all-template-user/all-temp
 import {BodyUserComponent} from "./frontoffice/body-user/body-user.component";
 import {ActiviteAdminComponent} from "./backoffice/activite-admin/activite-admin.component";
 import {PostAdminComponent} from "./backoffice/post-admin/post-admin.component";
+import {ForumCommentAdminComponent} from "./backoffice/forum-comment-admin/forum-comment-admin.component";
 
 const routes: Routes = [
   {
@@ -20,11 +21,17 @@ const routes: Routes = [
         component: ActiviteAdminComponent,
       },
       {
-        path: 'Post',
+        path: 'post',
         component: PostAdminComponent,
+      },
+
+
+
+  {
+        path: 'comment',
+        component: ForumCommentAdminComponent,
       }
     ]
-
   },
   {
     path: '' , component: AllTemplateUserComponent,
