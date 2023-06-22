@@ -12,6 +12,10 @@ import { HeaderUserComponent } from './frontoffice/header-user/header-user.compo
 import { BodyUserComponent } from './frontoffice/body-user/body-user.component';
 import { AllTemplateUserComponent } from './frontoffice/all-template-user/all-template-user.component';
 import { FooterUserComponent } from './frontoffice/footer-user/footer-user.component';
+import {HttpClientModule} from "@angular/common/http";
+import { LieuAdminComponent } from './backoffice/lieu-admin/lieu-admin.component';
+import {FormsModule, ReactiveFormsModule} from "@angular/forms";
+import {NgbModule} from "@ng-bootstrap/ng-bootstrap";
 
 @NgModule({
   declarations: [
@@ -24,11 +28,16 @@ import { FooterUserComponent } from './frontoffice/footer-user/footer-user.compo
     HeaderUserComponent,
     BodyUserComponent,
     AllTemplateUserComponent,
-    FooterUserComponent
+    FooterUserComponent,
+    LieuAdminComponent
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule
+    AppRoutingModule,
+    HttpClientModule,
+    FormsModule,
+    ReactiveFormsModule,
+    NgbModule
   ],
   providers: [],
   bootstrap: [AppComponent]
