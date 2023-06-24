@@ -1,7 +1,7 @@
 import { Component, OnInit, NgZone, NgModule } from '@angular/core';
 import {Post} from '../../models/post';
 import {CrudPostService} from '../../services/crud-post.service';
-import {FormBuilder} from '@angular/forms';
+import {FormBuilder, FormGroup} from '@angular/forms';
 import {Router} from '@angular/router';
 import { ModalDismissReasons, NgbModal } from '@ng-bootstrap/ng-bootstrap';
 
@@ -33,12 +33,26 @@ export class PostAdminComponent implements OnInit {
     this.postService.getAllPosts().subscribe(res => this.listPosts = res);
   }
 
-  addPost(post: any){
-    this.postService.addPost(post).subscribe(() => {
-      this.postService.getAllPosts();
+  addPost(post: Post, imageInput: HTMLInputElement) {
+    const formData = new FormData();
+
+    // Append the post data to the form data
+    formData.append('post', JSON.stringify(post));
+
+    // Check if a file is selected
+    if (imageInput.files && imageInput.files.length > 0) {
+      const file: File = imageInput.files[0];
+      formData.append('mediaContent', file, file.name);
+    }
+
+    this.postService.addPost(formData).subscribe(() => {
+      this.getAllPosts();
       this.form = false;
     });
   }
+
+
+
   updatePost(post: Post){
     this.postService.updatePost(post).subscribe();
   }

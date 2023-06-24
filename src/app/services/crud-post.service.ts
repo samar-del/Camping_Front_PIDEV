@@ -15,14 +15,14 @@ export class CrudPostService {
   }
 
   addPost(post: any) {
-    return this.httpClient.post(`${this.API_URL}/addPost/`, post);
+    return this.httpClient.post(`${this.API_URL}/add-post/`, post);
   }
 
   updatePost(post: Post){
-    return this.httpClient.put(`${this.API_URL}/editPost`, post);
+    return this.httpClient.put(`${this.API_URL}/edit-post`, post);
   }
   deletePost(idPost: any){
-    return  this.httpClient.delete(`${this.API_URL}/deletePost/${idPost}`);
+    return  this.httpClient.delete(`${this.API_URL}/delete-post/${idPost}`);
   }
 
 }
