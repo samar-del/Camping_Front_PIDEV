@@ -1,6 +1,5 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { HeaderAdminComponent } from './backoffice/header-admin/header-admin.component';
@@ -12,7 +11,10 @@ import { HeaderUserComponent } from './frontoffice/header-user/header-user.compo
 import { BodyUserComponent } from './frontoffice/body-user/body-user.component';
 import { AllTemplateUserComponent } from './frontoffice/all-template-user/all-template-user.component';
 import { FooterUserComponent } from './frontoffice/footer-user/footer-user.component';
-
+import {HttpClientModule} from "@angular/common/http";
+import {FormsModule} from "@angular/forms";
+import { UserComponent } from './backoffice/user/user.component';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 @NgModule({
   declarations: [
     AppComponent,
@@ -24,11 +26,16 @@ import { FooterUserComponent } from './frontoffice/footer-user/footer-user.compo
     HeaderUserComponent,
     BodyUserComponent,
     AllTemplateUserComponent,
-    FooterUserComponent
+    FooterUserComponent,
+    UserComponent,
+
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule
+    AppRoutingModule,
+    HttpClientModule,
+    FormsModule,
+    NgbModule
   ],
   providers: [],
   bootstrap: [AppComponent]

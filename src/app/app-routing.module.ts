@@ -4,6 +4,7 @@ import {AllTemplateAdminComponent} from "./backoffice/all-template-admin/all-tem
 import {BodyAdminComponent} from "./backoffice/body-admin/body-admin.component";
 import {AllTemplateUserComponent} from "./frontoffice/all-template-user/all-template-user.component";
 import {BodyUserComponent} from "./frontoffice/body-user/body-user.component";
+import {UserComponent} from "./backoffice/user/user.component";
 
 const routes: Routes = [
   {
@@ -12,6 +13,10 @@ const routes: Routes = [
       {
         path: 'home',
         component: BodyAdminComponent,
+      },
+      {
+        path: 'User',
+        component: UserComponent,
       }
     ]
   },
