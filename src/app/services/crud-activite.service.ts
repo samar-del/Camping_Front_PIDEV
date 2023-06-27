@@ -13,9 +13,10 @@ export class CrudActiviteService {
     return this.httpClient.get(`${this.API_URL}/all-activite`)
   }
 
-  addActivite(activite : any) {
+ addActivite(activite : any) {
     return this.httpClient.post(`${this.API_URL}/add-activite`, activite)
   }
+
 
   editActivite(activite: Activite){
     return this.httpClient.put(`${this.API_URL}/edit-activite`, activite)

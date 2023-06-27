@@ -15,6 +15,7 @@ import { ActiviteAdminComponent } from './backoffice/activite-admin/activite-adm
 import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import {HttpClientModule} from "@angular/common/http";
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { ReservationAdminComponent } from './backoffice/reservation-admin/reservation-admin.component';
 
 @NgModule({
   declarations: [
@@ -28,7 +29,8 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
     BodyUserComponent,
     AllTemplateUserComponent,
     FooterUserComponent,
-    ActiviteAdminComponent
+    ActiviteAdminComponent,
+    ReservationAdminComponent,
   ],
   imports: [
     BrowserModule,

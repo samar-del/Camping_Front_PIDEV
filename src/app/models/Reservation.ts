@@ -7,4 +7,5 @@ export class Reservation {
   nom!: string;
   telephone!:number;
   transport!:string;
+  email!:string;
 }
