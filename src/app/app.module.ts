@@ -16,6 +16,9 @@ import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import {HttpClientModule} from "@angular/common/http";
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { ReservationAdminComponent } from './backoffice/reservation-admin/reservation-admin.component';
+import { ActiviteUserComponent } from './frontoffice/activite-user/activite-user.component';
+import { ReservationUserComponent } from './frontoffice/reservation-user/reservation-user.component';
+import { ChatbotComponentComponent } from './frontoffice/chatbot-component/chatbot-component.component';
 
 @NgModule({
   declarations: [
@@ -31,6 +34,9 @@ import { ReservationAdminComponent } from './backoffice/reservation-admin/reserv
     FooterUserComponent,
     ActiviteAdminComponent,
     ReservationAdminComponent,
+    ActiviteUserComponent,
+    ReservationUserComponent,
+    ChatbotComponentComponent,
   ],
   imports: [
     BrowserModule,

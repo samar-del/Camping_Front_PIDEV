@@ -5,6 +5,8 @@ import {CrudReservationService} from "../../services/crud-reservation.service";
 import {FormBuilder} from "@angular/forms";
 import {Router} from "@angular/router";
 import {ModalDismissReasons, NgbModal} from "@ng-bootstrap/ng-bootstrap";
+import {CrudActiviteService} from "../../services/crud-activite.service";
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-reservation-admin',
@@ -15,11 +17,14 @@ export class ReservationAdminComponent implements OnInit {
 
   reservation: Reservation = new Reservation();
   listReservation :any = [];
+  listActivites :any = [];
   form : boolean = false;
   closeResult! : string;
+  selectedActivity: any;
 
   constructor(
     private reservationService : CrudReservationService,
+    private activiteService : CrudActiviteService,
     public formBuilder: FormBuilder,
     private router: Router,
     private ngZone: NgZone,
@@ -28,10 +33,15 @@ export class ReservationAdminComponent implements OnInit {
   ngOnInit(): void {
     this.reservationService.getAllReservations().subscribe(res=>{console.log(res)
       this.listReservation=res;});
+    this.listActivites= this.getAllActivites();
   }
 
   getAllReservations(){
     this.reservationService.getAllReservations().subscribe(res => this.listReservation = res)
+  }
+
+  getAllActivites(){
+    this.activiteService.getAllActivites().subscribe(res => this.listActivites = res)
   }
 
   addReservation(reservation: any){
@@ -41,12 +51,45 @@ export class ReservationAdminComponent implements OnInit {
     });
   }
 
+  addReservationActivite(reservation: any){
+    this.reservationService.addReservationActivite(reservation,this.selectedActivity).subscribe(() => {
+      this.getAllReservations();
+      this.form = false;
+    });
+    Swal.fire({
+      position: 'top-end',
+      icon: 'success',
+      title: 'Votre réservation a été bien enregistrée',
+      showConfirmButton: false,
+      timer: 1500
+    })
+  }
+
   editReservation(reservation : Reservation){
     this.reservationService.editReservation(reservation).subscribe();
   }
 
   deleteReservation(idReservation : any){
-    this.reservationService.deleteReservation(idReservation).subscribe(() => this.getAllReservations())
+    Swal.fire({
+      title: 'Are you sure?',
+      text: "You won't be able to revert this!",
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',
+      confirmButtonText: 'Yes, delete it!'
+    }).then((result) => {
+      if (result.isConfirmed) {
+        this.reservationService.deleteReservation(idReservation).subscribe(() => {
+          this.getAllReservations();
+          Swal.fire(
+            'Deleted!',
+            'Réservation a été supprimée',
+            'success'
+          );
+        });
+      }
+    });
   }
 
   open(content: any) {

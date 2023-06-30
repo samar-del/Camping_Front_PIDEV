@@ -18,6 +18,10 @@ export class CrudReservationService {
     return this.httpClient.post(`${this.API_URL}/add-reservation`, reservation)
   }
 
+  addReservationActivite(reservation : any, idActivite : any) {
+    return this.httpClient.post(`${this.API_URL}/addReservationActivity/${idActivite}`, reservation)
+  }
+
   editReservation(reservation: Reservation){
     return this.httpClient.put(`${this.API_URL}/edit-reservation`, reservation)
   }

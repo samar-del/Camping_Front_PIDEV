@@ -1,3 +1,5 @@
+import {Activite} from "./Activite";
+
 export class Reservation {
   idReservation!: number;
   nbrPersonne!: number;
@@ -8,4 +10,5 @@ export class Reservation {
   telephone!:number;
   transport!:string;
   email!:string;
+  activite!:Activite;
 }

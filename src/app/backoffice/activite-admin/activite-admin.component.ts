@@ -5,6 +5,7 @@ import { ModalDismissReasons, NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import {FormBuilder} from "@angular/forms";
 import {Router} from "@angular/router";
 import {DomSanitizer, SafeUrl} from "@angular/platform-browser";
+import Swal from "sweetalert2";
 
 @Component({
   selector: 'app-activite-admin',
@@ -61,6 +62,14 @@ export class ActiviteAdminComponent implements OnInit {
       this.getAllActivites();
       this.form = false;
     });
+
+    Swal.fire({
+      position: 'top-end',
+      icon: 'success',
+      title: 'Votre activité a été bien enregistrée',
+      showConfirmButton: false,
+      timer: 1500
+    })
   }
  /* addActivite(activite: any){
     this.activiteService.addActivite(activite).subscribe(() => {
@@ -81,7 +90,27 @@ export class ActiviteAdminComponent implements OnInit {
   }
 
   deleteActivite(idActivite : any){
-    this.activiteService.deleteActivite(idActivite).subscribe(() => this.getAllActivites())
+   // this.activiteService.deleteActivite(idActivite).subscribe(() => this.getAllActivites())
+    Swal.fire({
+      title: 'Are you sure?',
+      text: "You won't be able to revert this!",
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',
+      confirmButtonText: 'Yes, delete it!'
+    }).then((result) => {
+      if (result.isConfirmed) {
+        this.activiteService.deleteActivite(idActivite).subscribe(() => {
+          this.getAllActivites();
+          Swal.fire(
+            'Deleted!',
+            'Réservation a été supprimée',
+            'success'
+          );
+        });
+      }
+    });
   }
 
   open(content: any) {

@@ -1,0 +1,143 @@
+<!-- Features Start -->
+<div class="container-xxl py-5">
+  <div class="container">
+
+<app-chatbot-component></app-chatbot-component>
+<br>
+    <div class="row g-0 feature-row">
+      <div class="col-md-6 col-lg-3 wow fadeIn" data-wow-delay="0.1s">
+        <div class="feature-item border h-100 p-5">
+          <div class="btn-square bg-light rounded-circle mb-4" style="width: 64px; height: 64px;">
+            <img class="img-fluid" src="/assets/front/img/icon/icon-1.png" alt="Icon">
+          </div>
+          <h5 class="mb-3">Award Winning</h5>
+          <p class="mb-0">Stet stet justo dolor sed duo. Ut clita sea sit ipsum diam</p>
+        </div>
+      </div>
+      <div class="col-md-6 col-lg-3 wow fadeIn" data-wow-delay="0.3s">
+        <div class="feature-item border h-100 p-5">
+          <div class="btn-square bg-light rounded-circle mb-4" style="width: 64px; height: 64px;">
+            <img class="img-fluid" src="/assets/front/img/icon/icon-2.png" alt="Icon">
+          </div>
+          <h5 class="mb-3">Professional Staff</h5>
+          <p class="mb-0">Stet stet justo dolor sed duo. Ut clita sea sit ipsum diam</p>
+        </div>
+      </div>
+      <div class="col-md-6 col-lg-3 wow fadeIn" data-wow-delay="0.5s">
+        <div class="feature-item border h-100 p-5">
+          <div class="btn-square bg-light rounded-circle mb-4" style="width: 64px; height: 64px;">
+            <img class="img-fluid" src="/assets/front/img/icon/icon-3.png" alt="Icon">
+          </div>
+          <h5 class="mb-3">Fair Prices</h5>
+          <p class="mb-0">Stet stet justo dolor sed duo. Ut clita sea sit ipsum diam</p>
+        </div>
+      </div>
+      <div class="col-md-6 col-lg-3 wow fadeIn" data-wow-delay="0.7s">
+        <div class="feature-item border h-100 p-5">
+          <div class="btn-square bg-light rounded-circle mb-4" style="width: 64px; height: 64px;">
+            <img class="img-fluid" src="/assets/front/img/icon/icon-4.png" alt="Icon">
+          </div>
+          <h5 class="mb-3">24/7 Support</h5>
+          <p class="mb-0">Stet stet justo dolor sed duo. Ut clita sea sit ipsum diam</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- Features End -->
+
+<!-- Activite start -->
+<div class="container">
+  <h2 style="text-align: center">Nos activités 2023</h2><br>
+  <div class="row">
+    <div class="col-md-4" *ngFor="let activite of listActivites; let i = index">
+      <div class="card" style="width: 20rem;">
+        <img class="card-img-top" *ngIf="activite.image" [src]="blobToUrl(activite.image)" alt="Card image cap">
+        <div class="card-body">
+          <h5 class="card-title">{{activite.nomActivite}}</h5>
+          <p class="card-text">{{activite.description}}</p>
+        </div>
+        <ul class="list-group list-group-flush">
+          <li class="list-group-item">Date début : {{activite.date_deb}}</li>
+          <li class="list-group-item">Date fin : {{activite.date_fin}}</li>
+        </ul>
+        <div class="card-body">
+          <button href="#" class="btn btn-primary" (click)="open(mymodal1)">Réserver maintenant !</button>
+          <ng-template #mymodal1 let-modal1>
+            <div class="modal-header">
+              <h4 class="modal-title" id="modal-basic-title" >Ajouter reservation</h4>
+              <button type="button" class="close" aria-label="Close" (click)="modal1.dismiss('Cross click')">
+                <span aria-hidden="true" (click)="cancel()">×</span>
+              </button>
+
+            </div>
+            <div class="center">
+              <form>
+                <div class="form-group row" >
+                  <div >
+                    <input type="text" class="form-control" placeholder="Nom personne" [(ngModel)]="reservation.nom" [ngModelOptions]="{ standalone: true }">
+                  </div>
+                </div>
+                <div class="form-group row" >
+                  <div >
+                    <input type="email" class="form-control" placeholder="Email" [(ngModel)]="reservation.email" [ngModelOptions]="{ standalone: true }">
+                  </div>
+                </div>
+                <div class="form-group row">
+                  <div >
+                    <input type="text" class="form-control" placeholder="Téléphone" [(ngModel)]="reservation.telephone" [ngModelOptions]="{ standalone: true }">
+                  </div>
+                </div>
+                <div class="form-group row">
+                  <div >
+                    <input type="date" class="form-control" placeholder="Date début" [(ngModel)]="reservation.date_deb" [ngModelOptions]="{ standalone: true }">
+                  </div>
+                </div>
+                <div class="form-group row">
+                  <div >
+                    <input type="date" class="form-control" placeholder="Date fin" [(ngModel)]="reservation.date_fin" [ngModelOptions]="{ standalone: true }">
+                  </div>
+                </div>
+                <div class="form-group row">
+                  <div >
+                    <input type="number" class="form-control" placeholder="Nombre de personne" [(ngModel)]="reservation.nbrPersonne" [ngModelOptions]="{ standalone: true }">
+                  </div>
+                </div>
+                <div class="form-group row">
+                  <div >
+                    <input type="text" class="form-control" placeholder="Prix total" [(ngModel)]="reservation.prixTotal" [ngModelOptions]="{ standalone: true }">
+                  </div>
+                </div>
+                <div class="form-group row">
+                  <div>
+                  <select class="form-select form-control" [(ngModel)]="reservation.transport" [ngModelOptions]="{ standalone: true }">
+                    <option value="1">Voiture</option>
+                    <option value="0">Bus</option>
+                  </select>
+                  </div>
+                  <!-- <input type="number" class="form-control" placeholder="Transport" [(ngModel)]="reservation.transport" [ngModelOptions]="{ standalone: true }">-->
+                </div>
+                <div class="form-group row">
+                  <div>
+                  <select class="form-select form-control" [(ngModel)]="selectedActivity" [ngModelOptions]="{ standalone: true }">
+                    <option *ngFor="let activity of listActivites" [value]="activity.idActivite">{{ activity.nomActivite }}</option>
+                  </select>
+                  </div>
+                </div>
+
+
+                <br>
+                <div class="modal-footer">
+                  <button type="button" class="btn btn-success" (click)="addReservationActivite(reservation)" (click)="modal1.close('Save click')">Ajouter</button>
+                  <button type="button" class="btn btn-primary" (click)="modal1.close('Save click')">Cancel</button>
+                </div>
+              </form>
+
+            </div>
+          </ng-template>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
