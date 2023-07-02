@@ -1,5 +1,5 @@
-import { NgModule } from '@angular/core';
-import { RouterModule, Routes } from '@angular/router';
+import {NgModule} from '@angular/core';
+import {RouterModule, Routes} from '@angular/router';
 import {AllTemplateAdminComponent} from "./backoffice/all-template-admin/all-template-admin.component";
 import {BodyAdminComponent} from "./backoffice/body-admin/body-admin.component";
 import {AllTemplateUserComponent} from "./frontoffice/all-template-user/all-template-user.component";
@@ -10,8 +10,8 @@ import {ForumCommentAdminComponent} from "./backoffice/forum-comment-admin/forum
 
 const routes: Routes = [
   {
-    path: 'admin' , component: AllTemplateAdminComponent,
-    children:[
+    path: 'admin', component: AllTemplateAdminComponent,
+    children: [
       {
         path: 'home',
         component: BodyAdminComponent,
@@ -25,27 +25,26 @@ const routes: Routes = [
         component: PostAdminComponent,
       },
 
-
-
-  {
+      {
         path: 'comment',
         component: ForumCommentAdminComponent,
       }
     ]
   },
   {
-    path: '' , component: AllTemplateUserComponent,
-    children:[
+    path: '', component: AllTemplateUserComponent,
+    children: [
       {
         path: '',
         component: BodyUserComponent,
       }
     ]
   }
-  ];
+];
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],
   exports: [RouterModule]
 })
-export class AppRoutingModule { }
+export class AppRoutingModule {
+}

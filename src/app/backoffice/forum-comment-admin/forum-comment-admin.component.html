@@ -11,49 +11,48 @@
       <button type="button" class="close" aria-label="Close" (click)="modal1.dismiss('Cross click')">
         <span aria-hidden="true" (click)="cancel()">×</span>
       </button>
-
     </div>
     <div class="center">
       <form>
         <div class="form-group row">
           <div class="col-md-12">
-            <input type="text" class="form-control" placeholder="Write a Comment" [(ngModel)]="comment.content" [ngModelOptions]="{ standalone: true }">
+            <input type="text" class="form-control" placeholder="Type a comment" [(ngModel)]="comment.content" [ngModelOptions]="{ standalone: true }">
           </div>
         </div>
         <div class="form-group row">
           <div class="col-md-12">
-            <input type="date" class="form-control" placeholder="Date Comment" [(ngModel)]="comment.datePosted" [ngModelOptions]="{ standalone: true }">
+            <input type="date" class="form-control" placeholder="Date of comment" [(ngModel)]="comment.datePosted" [ngModelOptions]="{ standalone: true }">
+          </div>
+        </div>
+        <div class="form-group row">
+          <div class="col-md-12">
+            <input type="file" class="form-control" accept="image/*" #imageInput>
           </div>
         </div>
 
         <br>
 
-        <button type="button" class="btn btn-success" (click)="addComment(comment); modal1.close('Save click')">Comment!</button>
+        <button type="button" class="btn btn-success" (click)="addComment(comment)" (click)="modal1.close('Save click')">Comment!</button>
         <button type="button" class="btn btn-info" (click)="modal1.close('Save click')">Cancel</button>
       </form>
-
-
     </div>
   </ng-template>
-
 
   <div class="table-responsive">
     <table class="table table-bordered">
       <thead>
       <tr>
         <th scope="col">Id</th>
-        <th scope="col">Titre</th>
-        <th scope="col">Description</th>
+        <th scope="col">Content</th>
         <th scope="col">Date</th>
         <th class="text-center" scope="col">Action</th>
       </tr>
       </thead>
       <tbody>
       <tr *ngFor="let comment of listComments; let i = index">
-        <th scope="row">{{comment.idComment}}</th>
-        <td>{{comment.content}}</td>
-        <td>{{comment.datePosted}}</td>
-
+        <th scope="row">{{ comment.idComment }}</th>
+        <td>{{ comment.content }}</td>
+        <td>{{ comment.datePosted }}</td>
         <td class="text-center">
           <button type="button" class="btn btn-outline-primary" (click)="open(mymodal)">edit</button>
           <ng-template #mymodal let-modal>
@@ -61,39 +60,30 @@
               <h4 class="modal-title" id="modal-basic-title">Edit</h4>
               <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
                 <span aria-hidden="true" (click)="cancel()">×</span>
-
               </button>
-
             </div>
             <div>
               <form>
                 <div class="modal-body">
                   <div class="row col-md-5">
-                    <input type="number" [(ngModel)]="comment.idComment" [ngModelOptions]="{standalone : true}" hidden />
+                    <input type="number" [(ngModel)]="comment.idComment" [ngModelOptions]="{ standalone: true }" hidden>
                   </div>
                   <div class="row col-md-5">
                     <label>Titre</label>
-                    <input type="text" [(ngModel)]="comment.content" [ngModelOptions]="{standalone : true}" />
+                    <input type="text" [(ngModel)]="comment.content" [ngModelOptions]="{ standalone: true }">
                   </div>
                   <div class="row col-md-5">
-                    <label>Date Comment</label>
-                    <input type="date" [(ngModel)]="comment.datePosted" [ngModelOptions]="{standalone : true}" />
+                    <label>Date</label>
+                    <input type="date" [(ngModel)]="comment.datePosted" [ngModelOptions]="{ standalone: true }">
                   </div>
-
-
-                  <div class="modal-footer">
-
-                    <button type="button" class="btn btn-info" (click)="modal.close('Save click'); cancel()">Cancel</button>
-                    <button class="btn btn-success" (click)="updateComment(comment); modal.close('Save click')">Confirm</button>
-                  </div>
+                </div>
+                <div class="modal-footer">
+                  <button type="button" class="btn btn-info" (click)="modal.close('Save click')" (click)="cancel()">Cancel</button>
+                  <button class="btn btn-success" (click)="updateComment(comment)" (click)="modal.close('Save click')">Confirm</button>
                 </div>
               </form>
             </div>
           </ng-template>
-
-
-        </td>
-        <td class="text-center">
           <button class="btn btn-sm btn-danger" (click)="deleteComment(comment.idComment)">Delete</button>
         </td>
       </tr>

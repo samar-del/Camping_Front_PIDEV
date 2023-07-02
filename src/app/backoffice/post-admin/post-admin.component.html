@@ -52,7 +52,7 @@
         <th scope="col">Description</th>
         <th scope="col">Media Content</th>
         <th scope="col">Date</th>
-        <th class="text-center" scope="col">Action</th>
+        <th class="text-center" scope="col">Actions</th>
       </tr>
       </thead>
       <tbody>
@@ -60,11 +60,17 @@
         <th scope="row">{{ post.idPost }}</th>
         <td>{{ post.title }}</td>
         <td>{{ post.description }}</td>
-        <td>{{ post.mediaContent }}</td>
+        <td>
+          <img *ngIf="post.mediaContent" [src]="blobToUrl(post.mediaContent)" alt="Post Image"
+               (click)="openImageModal(post.mediaContent)">
+        </td>
+
         <td>{{ post.date }}</td>
 
         <td class="text-center">
           <button type="button" class="btn btn-outline-primary" (click)="open(mymodal)">edit</button>
+          <button class="btn btn-sm btn-danger" (click)="deletePost(post.idPost)">Delete</button>
+        </td>
           <ng-template #mymodal let-modal>
             <div class="modal-header">
               <h4 class="modal-title" id="modal-basic-title">Edit</h4>
@@ -96,18 +102,28 @@
                   </div>
                 </div>
                 <div class="modal-footer">
-                  <button type="button" class="btn btn-info" (click)="modal.close('Save click')" (click)="cancel()">Cancel</button>
                   <button class="btn btn-success" (click)="updatePost(post)" (click)="modal.close('Save click')">Confirm</button>
+                  <button type="button" class="btn btn-info" (click)="modal.close('Save click')" (click)="cancel()">Cancel</button>
                 </div>
               </form>
             </div>
           </ng-template>
-        </td>
-        <td class="text-center">
-          <button class="btn btn-sm btn-danger" (click)="deletePost(post.idPost)">Delete</button>
-        </td>
       </tr>
       </tbody>
     </table>
   </div>
+
+  <!-- Image Modal -->
+  <ng-template #imageModal let-modal>
+    <div class="modal-header">
+      <h4 class="modal-title" id="modal-basic-title">Image Preview</h4>
+      <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+        <span aria-hidden="true">×</span>
+      </button>
+    </div>
+    <div class="modal-body">
+      <img [src]="selectedImage" alt="Enlarged Image" class="img-fluid enlarged-image">
+    </div>
+  </ng-template>
+
 </div>
