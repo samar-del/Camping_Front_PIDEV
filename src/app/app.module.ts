@@ -19,6 +19,7 @@ import { ReservationAdminComponent } from './backoffice/reservation-admin/reserv
 import { ActiviteUserComponent } from './frontoffice/activite-user/activite-user.component';
 import { ReservationUserComponent } from './frontoffice/reservation-user/reservation-user.component';
 import { ChatbotComponentComponent } from './frontoffice/chatbot-component/chatbot-component.component';
+import { filterActivite } from './frontoffice/activite-user/filterActivite.pipe';
 
 @NgModule({
   declarations: [
@@ -37,6 +38,7 @@ import { ChatbotComponentComponent } from './frontoffice/chatbot-component/chatb
     ActiviteUserComponent,
     ReservationUserComponent,
     ChatbotComponentComponent,
+    filterActivite
   ],
   imports: [
     BrowserModule,

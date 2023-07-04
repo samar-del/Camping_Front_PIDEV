@@ -19,6 +19,9 @@ export class ActiviteUserComponent implements OnInit {
   form : boolean = false;
   closeResult! : string;
   selectedActivity: any;
+  searchText: string = '';
+  searchDate!: Date ;
+
   constructor(private activiteService : CrudActiviteService,
               private reservationService : CrudReservationService,
               public formBuilder: FormBuilder,

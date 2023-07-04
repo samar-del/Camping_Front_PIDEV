@@ -49,8 +49,10 @@
 <!-- Activite start -->
 <div class="container">
   <h2 style="text-align: center">Nos activités 2023</h2><br>
+  <input type="text" class="form-control" [(ngModel)]="searchText" placeholder="Chercher une activité">
+<br>
   <div class="row">
-    <div class="col-md-4" *ngFor="let activite of listActivites; let i = index">
+    <div class="col-md-4" *ngFor="let activite of listActivites| filter: searchText; let i = index">
       <div class="card" style="width: 20rem;">
         <img class="card-img-top" *ngIf="activite.image" [src]="blobToUrl(activite.image)" alt="Card image cap">
         <div class="card-body">
@@ -60,6 +62,7 @@
         <ul class="list-group list-group-flush">
           <li class="list-group-item">Date début : {{activite.date_deb}}</li>
           <li class="list-group-item">Date fin : {{activite.date_fin}}</li>
+          <li class="list-group-item">Lieu de camping : {{activite.lieuActivite?.nomLieu}}</li>
         </ul>
         <div class="card-body">
           <button href="#" class="btn btn-primary" (click)="open(mymodal1)">Réserver maintenant !</button>
