@@ -1,0 +1,17 @@
+<div>
+  <h1>Ask me !</h1>
+  <div *ngFor="let message of chatMessages">
+    <div *ngIf="message.sender === 'You'">
+      You: {{ message.message }}
+    </div>
+    <div *ngIf="message.sender === 'Bot'">
+      Bot: {{ message.message }}
+    </div>
+  </div>
+  <form [formGroup]="chatForm" (ngSubmit)="sendMessage()">
+    <div class="input-group mb-3">
+    <input class="form-control" type="text" formControlName="message" placeholder="Type your message" />
+    <button class="btn btn-primary" type="submit">Send</button>
+    </div>
+  </form>
+</div>
