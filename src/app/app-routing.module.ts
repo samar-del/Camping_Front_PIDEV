@@ -34,7 +34,8 @@ const routes: Routes = [
       {
         path: 'comment',
         component: ForumCommentAdminComponent,
-
+      },
+      {
         path: 'Reservation',
         component: ReservationAdminComponent,
 
