@@ -1,6 +1,6 @@
 <div class="container">
   <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
-    <h2 class="h2">Books List</h2>
+    <h2 class="h2">Activités List</h2>
   </div>
 
   <button class="btn btn-round btn-sm btn-success" (click)="open(mymodal1)">Ajouter activite</button>
@@ -16,30 +16,35 @@
     <div class="center">
       <form>
         <div class="form-group row" >
-          <div class="col-md-12">
+          <div>
             <input type="text" class="form-control" placeholder="Nom Activité" [(ngModel)]="activite.nomActivite" [ngModelOptions]="{ standalone: true }">
           </div>
         </div>
         <div class="form-group row">
-          <div class="col-md-12">
+          <div>
             <input type="text" class="form-control" placeholder="Description" [(ngModel)]="activite.description" [ngModelOptions]="{ standalone: true }">
           </div>
         </div>
         <div class="form-group row">
-          <div class="col-md-12">
+          <div>
             <input type="date" class="form-control" placeholder="Date début" [(ngModel)]="activite.date_deb" [ngModelOptions]="{ standalone: true }">
           </div>
         </div>
         <div class="form-group row">
-          <div class="col-md-12">
+          <div>
             <input type="date" class="form-control" placeholder="Date fin" [(ngModel)]="activite.date_fin" [ngModelOptions]="{ standalone: true }">
           </div>
         </div>
-
+        <div class="form-group row">
+          <div class="col-md-12">
+            <input type="file" class="form-control" accept="image/*" #imageInput>
+          </div>
+        </div>
         <br>
-
-        <button type="button" class="btn btn-success" (click)="addActivite(activite)" (click)="modal1.close('Save click')">Ajouter</button>
+        <div class="modal-footer">
+        <button type="button" class="btn btn-success" (click)="addActivite(activite, imageInput)" (click)="modal1.close('Save click')">Ajouter</button>
         <button type="button" class="btn btn-info" (click)="modal1.close('Save click')">Cancel</button>
+        </div>
       </form>
 
     </div>
@@ -54,6 +59,7 @@
         <th scope="col">Id</th>
         <th scope="col">Nom</th>
         <th scope="col">Description</th>
+        <th scope="col">Image Activite</th>
         <th scope="col">Date début</th>
         <th scope="col">Date fin</th>
         <th class="text-center" scope="col">Action</th>
@@ -64,6 +70,10 @@
         <th scope="row">{{activite.idActivite}}</th>
         <td>{{activite.nomActivite}}</td>
         <td>{{activite.description}}</td>
+        <td>
+          <img *ngIf="activite.image" [src]="blobToUrl(activite.image)" alt="Activite Image"  (click)="openImageInNewWindow(activite.image)">
+
+        </td>
         <td>{{activite.date_deb}}</td>
         <td>{{activite.date_fin}}</td>
         <td class="text-center">
@@ -82,24 +92,24 @@
             <div>
               <form>
                 <div class="modal-body">
-                  <div class="row" class="col-md-5">
+                  <div class="row" >
                     <input type="number" [(ngModel)]="activite.idActivite" [ngModelOptions]="{standalone : true}" hidden />
                   </div>
-                  <div class="row" class="col-md-5">
+                  <div class="row" >
                     <label>Nom</label>
-                    <input type="text" [(ngModel)]="activite.nomActivite" [ngModelOptions]="{standalone : true}" />
+                    <input type="text" class="form-control" [(ngModel)]="activite.nomActivite" [ngModelOptions]="{standalone : true}" />
                   </div>
-                  <div class="row" class="col-md-5">
+                  <div class="row" >
                     <label>Description</label>
-                    <input type="text" [(ngModel)]="activite.description" [ngModelOptions]="{standalone : true}" />
+                    <input type="text" class="form-control" [(ngModel)]="activite.description" [ngModelOptions]="{standalone : true}" />
                   </div>
-                  <div class="row" class="col-md-5">
+                  <div class="row" >
                     <label>Date début</label>
-                    <input type="Date" [(ngModel)]="activite.date_deb" [ngModelOptions]="{standalone : true}" />
+                    <input type="Date" class="form-control" [(ngModel)]="activite.date_deb" [ngModelOptions]="{standalone : true}" />
                   </div>
-                  <div class="row" class="col-md-5">
+                  <div class="row" >
                     <label>Date fin</label>
-                    <input type="Date" [(ngModel)]="activite.date_fin" [ngModelOptions]="{standalone : true}" />
+                    <input type="Date" class="form-control" [(ngModel)]="activite.date_fin" [ngModelOptions]="{standalone : true}" />
                   </div>
                 </div>
 

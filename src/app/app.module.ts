@@ -17,7 +17,11 @@ import {HttpClientModule} from "@angular/common/http";
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { PostAdminComponent } from './backoffice/post-admin/post-admin.component';
 import { ForumCommentAdminComponent } from './backoffice/forum-comment-admin/forum-comment-admin.component';
-
+import { ReservationAdminComponent } from './backoffice/reservation-admin/reservation-admin.component';
+import { ActiviteUserComponent } from './frontoffice/activite-user/activite-user.component';
+import { ReservationUserComponent } from './frontoffice/reservation-user/reservation-user.component';
+import { ChatbotComponentComponent } from './frontoffice/chatbot-component/chatbot-component.component';
+import { filterActivite } from './frontoffice/activite-user/filterActivite.pipe';
 
 @NgModule({
   declarations: [
@@ -32,8 +36,16 @@ import { ForumCommentAdminComponent } from './backoffice/forum-comment-admin/for
     AllTemplateUserComponent,
     FooterUserComponent,
     ActiviteAdminComponent,
+
     PostAdminComponent,
     ForumCommentAdminComponent
+
+    ReservationAdminComponent,
+    ActiviteUserComponent,
+    ReservationUserComponent,
+    ChatbotComponentComponent,
+    filterActivite
+
   ],
   imports: [
     BrowserModule,

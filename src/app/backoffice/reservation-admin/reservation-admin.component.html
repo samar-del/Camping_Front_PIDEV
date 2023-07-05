@@ -1,0 +1,183 @@
+<div class="container">
+  <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+    <h2 class="h2">Reservation List</h2>
+  </div>
+
+  <button class="btn btn-round btn-sm btn-success" (click)="open(mymodal1)">Ajouter reservation</button>
+  <br><br>
+
+  <ng-template #mymodal1 let-modal1>
+    <div class="modal-header">
+      <h4 class="modal-title" id="modal-basic-title" >Ajouter reservation</h4>
+      <button type="button" class="close" aria-label="Close" (click)="modal1.dismiss('Cross click')">
+        <span aria-hidden="true" (click)="cancel()">×</span>
+      </button>
+
+    </div>
+    <div class="center">
+      <form>
+        <div class="form-group row" >
+          <div >
+            <input type="text" class="form-control" placeholder="Nom personne" [(ngModel)]="reservation.nom" [ngModelOptions]="{ standalone: true }">
+          </div>
+        </div>
+        <div class="form-group row" >
+          <div >
+            <input type="email" class="form-control" placeholder="Email" [(ngModel)]="reservation.email" [ngModelOptions]="{ standalone: true }">
+          </div>
+        </div>
+        <div class="form-group row">
+          <div >
+            <input type="text" class="form-control" placeholder="Téléphone" [(ngModel)]="reservation.telephone" [ngModelOptions]="{ standalone: true }">
+          </div>
+        </div>
+        <div class="form-group row">
+          <div >
+            <input type="date" class="form-control" placeholder="Date début" [(ngModel)]="reservation.date_deb" [ngModelOptions]="{ standalone: true }">
+          </div>
+        </div>
+        <div class="form-group row">
+          <div >
+            <input type="date" class="form-control" placeholder="Date fin" [(ngModel)]="reservation.date_fin" [ngModelOptions]="{ standalone: true }">
+          </div>
+        </div>
+        <div class="form-group row">
+          <div >
+            <input type="number" class="form-control" placeholder="Nombre de personne" [(ngModel)]="reservation.nbrPersonne" [ngModelOptions]="{ standalone: true }">
+          </div>
+        </div>
+        <div class="form-group row">
+          <div >
+            <input type="text" class="form-control" placeholder="Prix total" [(ngModel)]="reservation.prixTotal" [ngModelOptions]="{ standalone: true }">
+          </div>
+        </div>
+        <div class="form-group row">
+          <div>
+          <select class="form-select form-control" [(ngModel)]="reservation.transport" [ngModelOptions]="{ standalone: true }">
+            <option value="1">Voiture</option>
+            <option value="0">Bus</option>
+          </select>
+          </div>
+           <!-- <input type="number" class="form-control" placeholder="Transport" [(ngModel)]="reservation.transport" [ngModelOptions]="{ standalone: true }">-->
+        </div>
+        <div class="form-group row">
+          <div>
+          <select class="form-select form-control" [(ngModel)]="selectedActivity" [ngModelOptions]="{ standalone: true }">
+            <option *ngFor="let activity of listActivites" [value]="activity.idActivite">{{ activity.nomActivite }}</option>
+          </select>
+          </div>
+        </div>
+
+
+        <br>
+        <div class="modal-footer">
+        <button type="button" class="btn btn-primary" (click)="addReservationActivite(reservation)" (click)="modal1.close('Save click')">Ajouter</button>
+        <button type="button" class="btn btn-info" (click)="modal1.close('Save click')">Cancel</button>
+        </div>
+      </form>
+
+    </div>
+  </ng-template>
+
+  <div class="table-responsive">
+    <table class="table table-bordered">
+      <thead>
+      <tr>
+        <th scope="col">Id</th>
+        <th scope="col">Activité</th>
+        <th scope="col">Nombre de personne</th>
+        <th scope="col">Date arrivée</th>
+        <th scope="col">Date départ</th>
+        <th scope="col">Prix total</th>
+        <th scope="col">Nom</th>
+        <th scope="col">Email</th>
+        <th scope="col">Téléphone</th>
+        <th scope="col">Transport</th>
+        <th class="text-center" scope="col">Action</th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr *ngFor="let reservation of listReservation; let i = index">
+        <th scope="row">{{reservation.idReservation}}</th>
+        <td>{{reservation.activite.nomActivite}}</td>
+        <td>{{reservation.nbrPersonne}}</td>
+        <td>{{reservation.date_deb}}</td>
+        <td>{{reservation.date_fin}}</td>
+        <td>{{reservation.prixTotal}}</td>
+        <td>{{reservation.nom}}</td>
+        <td>{{reservation.email}}</td>
+        <td>{{reservation.telephone}}</td>
+        <td>{{reservation.transport}}</td>
+        <td class="text-center">
+          <button type="button" class="btn btn-outline-primary"
+                  (click)="open(mymodal)">edit</button>
+          <ng-template #mymodal let-modal>
+            <div class="modal-header">
+              <h4 class="modal-title" id="modal-basic-title">Edit</h4>
+              <button type="button" class="close" aria-label="Close"
+                      (click)="modal.dismiss('Cross click')">
+                <span aria-hidden="true" (click)="cancel()">×</span>
+
+              </button>
+
+            </div>
+            <div>
+              <form>
+                <div class="modal-body">
+                  <div class="row" >
+                    <input type="number" [(ngModel)]="reservation.idReservation" [ngModelOptions]="{standalone : true}" hidden />
+                  </div>
+                  <div class="row" >
+                    <label>Nom personne</label>
+                    <input type="text" class="form-control" [(ngModel)]="reservation.nom" [ngModelOptions]="{standalone : true}" />
+                  </div>
+                  <div class="row" >
+                    <label>Email personne</label>
+                    <input type="email" class="form-control" [(ngModel)]="reservation.email" [ngModelOptions]="{standalone : true}" />
+                  </div>
+                  <div class="row" >
+                    <label>Téléphone</label>
+                    <input type="text" class="form-control" [(ngModel)]="reservation.telephone" [ngModelOptions]="{standalone : true}" />
+                  </div>
+                  <div class="row" >
+                    <label>Date début</label>
+                    <input type="Date" class="form-control" [(ngModel)]="reservation.date_deb" [ngModelOptions]="{standalone : true}" />
+                  </div>
+                  <div class="row" >
+                    <label>Date fin</label>
+                    <input type="Date" class="form-control" [(ngModel)]="reservation.date_fin" [ngModelOptions]="{standalone : true}" />
+                  </div>
+                  <div class="row" >
+                    <label>Nombre des personnes</label>
+                    <input type="number" class="form-control" [(ngModel)]="reservation.nbrPersonne" [ngModelOptions]="{standalone : true}" />
+                  </div>
+
+                  <div class="row" >
+                    <label>Prix totale</label>
+                    <input type="text" class="form-control" [(ngModel)]="reservation.prixTotal" [ngModelOptions]="{standalone : true}" />
+                  </div>
+                  <div class="row" >
+                    <label>Mode de transport</label>
+                    <select class="form-select form-control" [(ngModel)]="reservation.transport" [ngModelOptions]="{ standalone: true }">
+                      <option value="1">Voiture</option>
+                      <option value="0">Bus</option>
+                    </select>
+                   <!-- <input type="number" [(ngModel)]="reservation.transport" [ngModelOptions]="{standalone : true}" />-->
+                  </div>
+                </div>
+
+                <div class="modal-footer">
+
+                  <button type="button" class="btn btn-info"
+                          (click)="modal.close('Save click')" (click)="cancel()">Cancel</button>
+                  <button class="btn btn-success"(click)="editReservation(reservation)" (click)="modal.close('Save click')">Modifier</button>
+                </div>
+              </form>
+            </div>
+          </ng-template>
+          <button class="btn btn-sm btn-danger" (click)="deleteReservation(reservation.idReservation)">Delete</button>
+      </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
