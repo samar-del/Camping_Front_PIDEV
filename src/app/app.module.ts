@@ -15,6 +15,11 @@ import { ActiviteAdminComponent } from './backoffice/activite-admin/activite-adm
 import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import {HttpClientModule} from "@angular/common/http";
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { ReservationAdminComponent } from './backoffice/reservation-admin/reservation-admin.component';
+import { ActiviteUserComponent } from './frontoffice/activite-user/activite-user.component';
+import { ReservationUserComponent } from './frontoffice/reservation-user/reservation-user.component';
+import { ChatbotComponentComponent } from './frontoffice/chatbot-component/chatbot-component.component';
+import { FeedbackAdminComponent } from './backoffice/feedback-admin/feedback-admin.component';
 
 @NgModule({
   declarations: [
@@ -28,7 +33,12 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
     BodyUserComponent,
     AllTemplateUserComponent,
     FooterUserComponent,
-    ActiviteAdminComponent
+    ActiviteAdminComponent,
+    ReservationAdminComponent,
+    ActiviteUserComponent,
+    ReservationUserComponent,
+    ChatbotComponentComponent,
+    FeedbackAdminComponent,
   ],
   imports: [
     BrowserModule,

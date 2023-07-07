@@ -1,0 +1,139 @@
+<div class="container">
+  <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+    <h2 class="h2">Feedback List</h2>
+  </div>
+
+  <button class="btn btn-round btn-sm btn-success" (click)="open(mymodal1)">Ajouter feedback</button>
+  <br><br>
+
+  <ng-template #mymodal1 let-modal1>
+    <div class="modal-header">
+      <h4 class="modal-title" id="modal-basic-title">Ajouter feedback</h4>
+      <button type="button" class="close" aria-label="Close" (click)="modal1.dismiss('Cross click')">
+        <span aria-hidden="true" (click)="cancel()">×</span>
+      </button>
+
+    </div>
+    <div class="center">
+      <form>
+        <div class="form-group row">
+          <div>
+            <input type="text" class="form-control" placeholder="Nom personne" [(ngModel)]="feedback.description"
+                   [ngModelOptions]="{ standalone: true }">
+          </div>
+        </div>
+        <div class="form-group row">
+          <div>
+            <select class="form-select form-control" [(ngModel)]="feedback.utilisateur"
+                    [ngModelOptions]="{ standalone: true }">
+              <option *ngFor="let utilisateur of users" [value]="utilisateur">{{utilisateur.prenom}}</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="form-group row">
+          <div>
+            <select class="form-select form-control" [(ngModel)]="feedback.activite"
+                    [ngModelOptions]="{ standalone: true }">
+              <option *ngFor="let activity of activites"
+                      [value]="activity">{{ activity.nomActivite }}</option>
+            </select>
+          </div>
+        </div>
+
+
+        <br>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-primary" (click)="addFeedback(feedback)"
+                  (click)="modal1.close('Save click')">Ajouter
+          </button>
+          <button type="button" class="btn btn-info" (click)="modal1.close('Save click')">Cancel</button>
+        </div>
+      </form>
+
+    </div>
+  </ng-template>
+
+  <div class="table-responsive">
+    <table class="table table-bordered">
+      <thead>
+      <tr>
+        <th scope="col">Id</th>
+        <th scope="col">Date</th>
+        <th scope="col">Description</th>
+        <th scope="col">Type</th>
+        <th scope="col">Nom utilisateur</th>
+        <th scope="col">Nom Activité</th>
+        <th class="text-center" scope="col">Action</th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr *ngFor="let feedback of feedbacks; let i = index">
+        <th scope="row">{{feedback.idFeedback}}</th>
+        <td>{{feedback.created_date}}</td>
+        <td>{{feedback.description}}</td>
+        <td>{{feedback.type}}</td>
+        <td>{{feedback.utilisateur.nom}}</td>
+        <td>{{feedback.activite.nomActivite}}</td>
+        <td class="text-center">
+          <button type="button" class="btn btn-outline-primary"
+                  (click)="open(mymodal)">edit
+          </button>
+          <ng-template #mymodal let-modal>
+            <div class="modal-header">
+              <h4 class="modal-title" id="modal-basic-title">Edit</h4>
+              <button type="button" class="close" aria-label="Close"
+                      (click)="modal.dismiss('Cross click')">
+                <span aria-hidden="true" (click)="cancel()">×</span>
+
+              </button>
+
+            </div>
+            <div>
+              <form>
+                <div class="modal-body">
+                  <div class="row">
+                    <input type="number" [(ngModel)]="feedback.idFeedback" [ngModelOptions]="{standalone : true}"
+                           hidden/>
+                  </div>
+                  <div class="row">
+                    <label>Description</label>
+                    <input type="text" class="form-control" [(ngModel)]="feedback.description"
+                           [ngModelOptions]="{standalone : true}"/>
+                  </div>
+                  <div class="row">
+                    <label>Utilisateur</label>
+                    <select class="form-select form-control" [(ngModel)]="feedback.utilisateur"
+                            [ngModelOptions]="{ standalone: true }">
+                      <option *ngFor="let utilisateur of users" [value]="utilisateur">{{utilisateur.prenom}}</option>
+                    </select>
+                  </div>
+                  <div class="row">
+                    <label>Activité</label>
+                    <select class="form-select form-control" [(ngModel)]="feedback.activite"
+                            [ngModelOptions]="{ standalone: true }">
+                      <option *ngFor="let activity of activites"
+                              [value]="activity">{{ activity.nomActivite }}</option>
+                    </select>
+                  </div>
+                </div>
+
+                <div class="modal-footer">
+
+                  <button type="button" class="btn btn-info"
+                          (click)="modal.close('Save click')" (click)="cancel()">Cancel
+                  </button>
+                  <button class="btn btn-success" (click)="editFeedback(feedback)"
+                          (click)="modal.close('Save click')">Modifier
+                  </button>
+                </div>
+              </form>
+            </div>
+          </ng-template>
+          <button class="btn btn-sm btn-danger" (click)="deleteFeedback(feedback.idFeedback)">Delete</button>
+      </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+
