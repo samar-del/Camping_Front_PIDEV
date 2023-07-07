@@ -1,0 +1,130 @@
+<div class="container">
+  <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+    <h2 class="h2">Activités List</h2>
+  </div>
+
+  <button class="btn btn-round btn-sm btn-success" (click)="open(mymodal1)">Ajouter activite</button>
+  <br><br>
+  <ng-template #mymodal1 let-modal1>
+    <div class="modal-header">
+      <h4 class="modal-title" id="modal-basic-title" >Ajouter activite</h4>
+      <button type="button" class="close" aria-label="Close" (click)="modal1.dismiss('Cross click')">
+        <span aria-hidden="true" (click)="cancel()">×</span>
+      </button>
+
+    </div>
+    <div class="center">
+      <form>
+        <div class="form-group row" >
+          <div>
+            <input type="text" class="form-control" placeholder="Nom Activité" [(ngModel)]="activite.nomActivite" [ngModelOptions]="{ standalone: true }">
+          </div>
+        </div>
+        <div class="form-group row">
+          <div>
+            <input type="text" class="form-control" placeholder="Description" [(ngModel)]="activite.description" [ngModelOptions]="{ standalone: true }">
+          </div>
+        </div>
+        <div class="form-group row">
+          <div>
+            <input type="date" class="form-control" placeholder="Date début" [(ngModel)]="activite.date_deb" [ngModelOptions]="{ standalone: true }">
+          </div>
+        </div>
+        <div class="form-group row">
+          <div>
+            <input type="date" class="form-control" placeholder="Date fin" [(ngModel)]="activite.date_fin" [ngModelOptions]="{ standalone: true }">
+          </div>
+        </div>
+        <div class="form-group row">
+          <div class="col-md-12">
+            <input type="file" class="form-control" accept="image/*" #imageInput>
+          </div>
+        </div>
+        <br>
+        <div class="modal-footer">
+        <button type="button" class="btn btn-success" (click)="addActivite(activite, imageInput)" (click)="modal1.close('Save click')">Ajouter</button>
+        <button type="button" class="btn btn-info" (click)="modal1.close('Save click')">Cancel</button>
+        </div>
+      </form>
+
+    </div>
+  </ng-template>
+
+
+
+  <div class="table-responsive">
+    <table class="table table-bordered">
+      <thead>
+      <tr>
+        <th scope="col">Id</th>
+        <th scope="col">Nom</th>
+        <th scope="col">Description</th>
+        <th scope="col">Image Activite</th>
+        <th scope="col">Date début</th>
+        <th scope="col">Date fin</th>
+        <th class="text-center" scope="col">Action</th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr *ngFor="let activite of listActivites; let i = index">
+        <th scope="row">{{activite.idActivite}}</th>
+        <td>{{activite.nomActivite}}</td>
+        <td>{{activite.description}}</td>
+        <td>
+          <img *ngIf="activite.image" [src]="blobToUrl(activite.image)" alt="Activite Image"  (click)="openImageInNewWindow(activite.image)">
+
+        </td>
+        <td>{{activite.date_deb}}</td>
+        <td>{{activite.date_fin}}</td>
+        <td class="text-center">
+          <button type="button" class="btn btn-outline-primary"
+                  (click)="open(mymodal)">edit</button>
+          <ng-template #mymodal let-modal>
+            <div class="modal-header">
+              <h4 class="modal-title" id="modal-basic-title">Edit</h4>
+              <button type="button" class="close" aria-label="Close"
+                      (click)="modal.dismiss('Cross click')">
+                <span aria-hidden="true" (click)="cancel()">×</span>
+
+              </button>
+
+            </div>
+            <div>
+              <form>
+                <div class="modal-body">
+                  <div class="row" >
+                    <input type="number" [(ngModel)]="activite.idActivite" [ngModelOptions]="{standalone : true}" hidden />
+                  </div>
+                  <div class="row" >
+                    <label>Nom</label>
+                    <input type="text" class="form-control" [(ngModel)]="activite.nomActivite" [ngModelOptions]="{standalone : true}" />
+                  </div>
+                  <div class="row" >
+                    <label>Description</label>
+                    <input type="text" class="form-control" [(ngModel)]="activite.description" [ngModelOptions]="{standalone : true}" />
+                  </div>
+                  <div class="row" >
+                    <label>Date début</label>
+                    <input type="Date" class="form-control" [(ngModel)]="activite.date_deb" [ngModelOptions]="{standalone : true}" />
+                  </div>
+                  <div class="row" >
+                    <label>Date fin</label>
+                    <input type="Date" class="form-control" [(ngModel)]="activite.date_fin" [ngModelOptions]="{standalone : true}" />
+                  </div>
+                </div>
+
+                <div class="modal-footer">
+
+                  <button type="button" class="btn btn-info"
+                          (click)="modal.close('Save click')" (click)="cancel()">Cancel</button>
+                  <button class="btn btn-success"(click)="editActivite(activite)" (click)="modal.close('Save click')">Modifier</button>
+                </div>
+              </form>
+            </div>
+          </ng-template>
+          <button class="btn btn-sm btn-danger" (click)="deleteActivite(activite.idActivite)">Delete</button>
+      </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
