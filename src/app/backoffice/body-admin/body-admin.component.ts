@@ -37,14 +37,19 @@ export class BodyAdminComponent implements OnInit {
     const ctx = canvas.getContext('2d');
 
     new Chart(ctx, {
-      type: 'bar',
+      type: 'pie',  // Set the chart type to 'pie'
       data: {
         labels: activities,
         datasets: [
           {
             label: 'Reservations per Activity',
             data: counts,
-            backgroundColor: 'rgba(75, 192, 192, 0.6)',
+            backgroundColor: [
+              'rgba(75, 192, 192, 0.6)',
+              'rgba(192, 75, 75, 0.6)',
+              'rgba(75, 75, 192, 0.6)',
+              // Add more colors if needed
+            ],
             borderColor: 'rgba(75, 192, 192, 1)',
             borderWidth: 1
           }
