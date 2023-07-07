@@ -38,8 +38,7 @@ import { filterActivite } from './frontoffice/activite-user/filterActivite.pipe'
     ActiviteAdminComponent,
 
     PostAdminComponent,
-    ForumCommentAdminComponent
-
+    ForumCommentAdminComponent,
     ReservationAdminComponent,
     ActiviteUserComponent,
     ReservationUserComponent,
