@@ -11,12 +11,50 @@
       <li class="list-group-item">Date: {{ post.date }}</li>
       <!-- Add more details as needed -->
     </ul>
+      <br>
       <h5>Comments</h5>
       <app-comment-section [postId]="postId"></app-comment-section>
     </div>
   </div>
 
   <br>
+  <div class="container">
+    <button type="button" class="btn btn-primary" (click)="open(mymodal1)">Add Comment</button>
+    <!-- Add other buttons or form for adding a new comment as needed -->
 
+    <!-- New Comment Modal -->
+    <ng-template #mymodal1 let-modal1>
+      <div class="modal-header">
+        <h4 class="modal-title" id="modal-basic-title" >Add A New Comment</h4>
+        <button type="button" class="close" aria-label="Close" (click)="modal1.dismiss('Cross click')">
+          <span aria-hidden="true" (click)="cancel()">×</span>
+        </button>
+      </div>
+      <div class="center">
+        <form>
+          <div class="form-group row">
+            <div class="col-md-12">
+              <input type="text" class="form-control" placeholder="Comment" [(ngModel)]="newComment.content"
+                     [ngModelOptions]="{ standalone: true }">
+            </div>
+          </div>
+          <div class="form-group row">
+            <div class="col-md-12">
+              <input type="date" class="form-control" placeholder="Description" [(ngModel)]="newComment.datePosted"
+                     [ngModelOptions]="{ standalone: true }">
+            </div>
+          </div>
+          <br>
+          <br>
 
+          <div class="modal-footer">
+            <button type="button" class="btn btn-success" (click)="addNewComment()"
+                    (click)="modal1.close('Save click')">Add Your Comment!</button>
+            <button type="button" class="btn btn-primary" (click)="modal1.close('Save click')">Cancel</button>
+          </div>
+        </form>
+      </div>
+    </ng-template>
+  </div>
 </div>
+

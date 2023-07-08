@@ -19,6 +19,11 @@ export class CrudForumCommentsService {
     return this.httpClient.post(`${this.API_URL}/add-comment/`, comment);
   }
 
+  addCommentToPost(comment: ForumComments, postId: number) {
+    return this.httpClient.post(`${this.API_URL}/assign-comment-to-post/${postId}`, comment);
+  }
+
+
   updateComment(comment: ForumComments){
     return this.httpClient.put(`${this.API_URL}/edit-comment`, comment);
   }
@@ -29,6 +34,8 @@ export class CrudForumCommentsService {
   getCommentsByPostId(postId: number) {
     return this.httpClient.get(`${this.API_URL}/comments/post/${postId}`);
   }
+
+
 
 }
 
