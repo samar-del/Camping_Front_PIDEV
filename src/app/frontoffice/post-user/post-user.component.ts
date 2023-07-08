@@ -26,6 +26,8 @@ export class PostUserComponent implements OnInit {
   searchText: string = '';
   searchDate!: Date;
   post: Post = new Post();
+  filteredPosts: Post[] = [];
+
 
 
   constructor(private postService: CrudPostService,
@@ -39,9 +41,10 @@ export class PostUserComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.postService.getAllPosts().subscribe(res => {
-      console.log(res)
+    this.postService.getAllPosts().subscribe((res: Post[]) => {
+      console.log(res);
       this.listPosts = res;
+      this.filteredPosts = [...this.listPosts]; // Initialize filteredPosts with all posts initially
     });
     this.getAllActivites();
   }
@@ -52,6 +55,14 @@ export class PostUserComponent implements OnInit {
   getAllActivites(){
     this.activiteService.getAllActivites().subscribe(res => this.listActivites = res)
   }
+  filterPosts() {
+    // Filter the list of posts based on the search text
+    this.filteredPosts = this.listPosts.filter((post: Post) =>
+      post.title.toLowerCase().includes(this.searchText.toLowerCase()) ||
+      post.description.toLowerCase().includes(this.searchText.toLowerCase())
+    );
+  }
+
 
   blobToUrl(blobData: string): SafeUrl {
     if (!blobData) return '';

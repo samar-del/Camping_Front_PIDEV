@@ -6,6 +6,7 @@
     <div class="card-body">
       <h5 class="card-title">{{ post.title }}</h5>
       <p class="card-text">{{ post.description }}</p>
+      <img class="card-img-top" *ngIf="post.mediaContent" [src]="blobToUrl(post.mediaContent)" alt="Card image cap">
     </div>
     <ul class="list-group list-group-flush">
       <li class="list-group-item">Date: {{ post.date }}</li>
