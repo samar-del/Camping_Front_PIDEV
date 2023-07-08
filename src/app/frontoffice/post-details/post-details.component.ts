@@ -6,6 +6,7 @@ import {ModalDismissReasons, NgbModal} from "@ng-bootstrap/ng-bootstrap";
 import {ForumCommentUserComponent} from "../forum-comment-user/forum-comment-user.component";
 import {CrudForumCommentsService} from "../../services/crud-forum-comments.service";
 import {ForumComments} from "../../models/forum-comments";
+import {DomSanitizer, SafeUrl} from "@angular/platform-browser";
 
 @Component({
   selector: 'app-post-details',
@@ -27,7 +28,8 @@ export class PostDetailsComponent implements OnInit {
     private route: ActivatedRoute,
     private postService: CrudPostService,
     private commentService: CrudForumCommentsService,
-    private modalService: NgbModal
+    private modalService: NgbModal,
+    private sanitizer: DomSanitizer
   ) {}
 
   ngOnInit(): void {
@@ -127,7 +129,12 @@ export class PostDetailsComponent implements OnInit {
       }
     );
   }*/
+  blobToUrl(blobData: string): SafeUrl {
+    if (!blobData) return '';
 
+    const base64Image = 'data:image/jpeg;base64,' + blobData;
+    return this.sanitizer.bypassSecurityTrustUrl(base64Image);
+  }
   addNewComment() {
     if (this.newComment.content && this.newComment.datePosted) {
       this.commentService.addCommentToPost(this.newComment, this.postId).subscribe(
