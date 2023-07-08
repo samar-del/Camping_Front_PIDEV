@@ -1,0 +1,126 @@
+<!-- Features Start -->
+<div class="container-xxl py-5">
+  <div class="container">
+
+<!--    <app-chatbot-component></app-chatbot-component>-->
+    <br>
+    <div class="row g-0 feature-row">
+      <div class="col-md-6 col-lg-3 wow fadeIn" data-wow-delay="0.1s">
+        <div class="feature-item border h-100 p-5">
+          <div class="btn-square bg-light rounded-circle mb-4" style="width: 64px; height: 64px;">
+            <img class="img-fluid" src="/assets/front/img/icon/icon-1.png" alt="Icon">
+          </div>
+          <h5 class="mb-3">Award Winning</h5>
+          <p class="mb-0">Stet stet justo dolor sed duo. Ut clita sea sit ipsum diam</p>
+        </div>
+      </div>
+      <div class="col-md-6 col-lg-3 wow fadeIn" data-wow-delay="0.3s">
+        <div class="feature-item border h-100 p-5">
+          <div class="btn-square bg-light rounded-circle mb-4" style="width: 64px; height: 64px;">
+            <img class="img-fluid" src="/assets/front/img/icon/icon-2.png" alt="Icon">
+          </div>
+          <h5 class="mb-3">Professional Staff</h5>
+          <p class="mb-0">Stet stet justo dolor sed duo. Ut clita sea sit ipsum diam</p>
+        </div>
+      </div>
+      <div class="col-md-6 col-lg-3 wow fadeIn" data-wow-delay="0.5s">
+        <div class="feature-item border h-100 p-5">
+          <div class="btn-square bg-light rounded-circle mb-4" style="width: 64px; height: 64px;">
+            <img class="img-fluid" src="/assets/front/img/icon/icon-3.png" alt="Icon">
+          </div>
+          <h5 class="mb-3">Fair Prices</h5>
+          <p class="mb-0">Stet stet justo dolor sed duo. Ut clita sea sit ipsum diam</p>
+        </div>
+      </div>
+      <div class="col-md-6 col-lg-3 wow fadeIn" data-wow-delay="0.7s">
+        <div class="feature-item border h-100 p-5">
+          <div class="btn-square bg-light rounded-circle mb-4" style="width: 64px; height: 64px;">
+            <img class="img-fluid" src="/assets/front/img/icon/icon-4.png" alt="Icon">
+          </div>
+          <h5 class="mb-3">24/7 Support</h5>
+          <p class="mb-0">Stet stet justo dolor sed duo. Ut clita sea sit ipsum diam</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- Features End -->
+
+<!-- Post start -->
+<div class="container">
+  <h2 style="text-align: center">Welcome to our Forums 2023</h2><br>
+  <input type="text" class="form-control" [(ngModel)]="searchText" placeholder="Chercher une un post">
+
+
+
+  </div>
+  <div class="row">
+    <div class="col-md-4" *ngFor="let post of listPosts| filter: searchText; let i = index">
+      <div class="card" style="width: 20rem;">
+        <img class="card-img-top" *ngIf="post.mediaContent" [src]="blobToUrl(post.mediaContent)" alt="Card image cap">
+        <div class="card-body">
+          <h5 class="card-title">{{post.title}}</h5>
+          <p class="card-text">{{post.description}}</p>
+        </div>
+        <ul class="list-group list-group-flush">
+          <li class="list-group-item">Date {{post.date}}</li>
+<!--          <li class="list-group-item">Lieu de camping : {{activite.lieuActivite?.nomLieu}}</li>-->
+        </ul>
+        <button class="btn btn-primary" (click)="viewPostDetails(post)">View Post Details</button>
+      </div>
+      <br>
+      <br>
+
+    </div>
+
+    <button href="#" class="btn btn-primary" (click)="open(mymodal1)">Tell us about your Experience !</button>
+
+    <ng-template #mymodal1 let-modal1>
+      <div class="modal-header">
+        <h4 class="modal-title" id="modal-basic-title" >Add A New Post</h4>
+        <button type="button" class="close" aria-label="Close" (click)="modal1.dismiss('Cross click')">
+          <span aria-hidden="true" (click)="cancel()">×</span>
+        </button>
+
+      </div>
+      <div class="center">
+        <form>
+          <div class="form-group row">
+            <div class="col-md-12">
+              <input type="text" class="form-control" placeholder="Titre Post" [(ngModel)]="post.title" [ngModelOptions]="{ standalone: true }">
+            </div>
+          </div>
+          <div class="form-group row">
+            <div class="col-md-12">
+              <input type="text" class="form-control" placeholder="Description" [(ngModel)]="post.description" [ngModelOptions]="{ standalone: true }">
+            </div>
+          </div>
+          <div class="form-group row">
+            <div class="col-md-12">
+              <input type="file" class="form-control" accept="image/*" #imageInput>
+            </div>
+          </div>
+          <div class="form-group row">
+            <div class="col-md-12">
+              <input type="date" class="form-control" placeholder="Date Post" [(ngModel)]="post.date" [ngModelOptions]="{ standalone: true }">
+            </div>
+          </div>
+          <div class="form-group row">
+            <div>
+              <select class="form-select form-control" [(ngModel)]="selectedPost" [ngModelOptions]="{ standalone: true }">
+                <option *ngFor="let activite of listActivites" [value]="activite.idActivite">{{ activite.nomActivite }}</option>
+              </select>
+            </div>
+          </div>
+          <br>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-success" (click)="addPost(post, imageInput)" (click)="modal1.close('Save click')">Add Your New Post!</button>
+            <button type="button" class="btn btn-primary" (click)="modal1.close('Save click')">Cancel</button>
+          </div>
+        </form>
+
+      </div>
+    </ng-template>
+  </div>
+
+

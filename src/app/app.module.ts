@@ -22,6 +22,10 @@ import { ActiviteUserComponent } from './frontoffice/activite-user/activite-user
 import { ReservationUserComponent } from './frontoffice/reservation-user/reservation-user.component';
 import { ChatbotComponentComponent } from './frontoffice/chatbot-component/chatbot-component.component';
 import { filterActivite } from './frontoffice/activite-user/filterActivite.pipe';
+import { CommentSectionComponent } from './backoffice/comment-section/comment-section.component';
+import { PostUserComponent } from './frontoffice/post-user/post-user.component';
+import { PostDetailsComponent } from './frontoffice/post-details/post-details.component';
+import { ForumCommentUserComponent } from './frontoffice/forum-comment-user/forum-comment-user.component';
 
 @NgModule({
   declarations: [
@@ -36,14 +40,17 @@ import { filterActivite } from './frontoffice/activite-user/filterActivite.pipe'
     AllTemplateUserComponent,
     FooterUserComponent,
     ActiviteAdminComponent,
-
     PostAdminComponent,
     ForumCommentAdminComponent,
     ReservationAdminComponent,
     ActiviteUserComponent,
     ReservationUserComponent,
     ChatbotComponentComponent,
-    filterActivite
+    filterActivite,
+    CommentSectionComponent,
+    PostUserComponent,
+    PostDetailsComponent,
+    ForumCommentUserComponent
 
   ],
   imports: [
