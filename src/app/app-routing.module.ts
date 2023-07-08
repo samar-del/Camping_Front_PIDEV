@@ -5,12 +5,12 @@ import {BodyAdminComponent} from "./backoffice/body-admin/body-admin.component";
 import {AllTemplateUserComponent} from "./frontoffice/all-template-user/all-template-user.component";
 import {BodyUserComponent} from "./frontoffice/body-user/body-user.component";
 import {ActiviteAdminComponent} from "./backoffice/activite-admin/activite-admin.component";
-
 import {PostAdminComponent} from "./backoffice/post-admin/post-admin.component";
 import {ForumCommentAdminComponent} from "./backoffice/forum-comment-admin/forum-comment-admin.component";
-
 import {ReservationAdminComponent} from "./backoffice/reservation-admin/reservation-admin.component";
 import {ActiviteUserComponent} from "./frontoffice/activite-user/activite-user.component";
+import {PostUserComponent} from "./frontoffice/post-user/post-user.component";
+import {PostDetailsComponent} from "./frontoffice/post-details/post-details.component";
 
 
 const routes: Routes = [
@@ -52,6 +52,14 @@ const routes: Routes = [
       {
         path: 'Nos-activites',
         component: ActiviteUserComponent,
+      },
+      {
+        path: 'posts',
+        component: PostUserComponent,
+      },
+      {
+        path: 'post-details',
+        component: PostDetailsComponent,
       }
     ]
   }

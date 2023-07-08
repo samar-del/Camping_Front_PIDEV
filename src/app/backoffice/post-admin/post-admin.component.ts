@@ -5,6 +5,7 @@ import {FormBuilder} from '@angular/forms';
 import {Router} from '@angular/router';
 import {ModalDismissReasons, NgbModal} from '@ng-bootstrap/ng-bootstrap';
 import {DomSanitizer, SafeUrl} from "@angular/platform-browser";
+import { ForumComments } from '../../models/forum-comments';
 
 
 
@@ -22,9 +23,15 @@ export class PostAdminComponent implements OnInit {
 
   // Add a new property to store the selected image URL
   selectedImage: string = '';
+  comments: { [postId: number]: ForumComments[] } = {};
+
+  // Add a new property to store the comment content
+  newComment: { content: string } = { content: '' };
+
 
 // Method to open the image modal
   @ViewChild('imageModal', {static: false}) imageModal: ElementRef | undefined;
+  @ViewChild('commentModal') commentModal: any;
 
    open(content: any) {
       this.modalService.open(content, {ariaLabelledBy: 'modal-basic-title'}).result.then((result: any) => {
@@ -39,6 +46,18 @@ export class PostAdminComponent implements OnInit {
     this.modalService.open(this.imageModal, { ariaLabelledBy: 'modal-basic-title' });
   }
 
+  openCommentModal(content: any) {
+    const modalRef = this.modalService.open(content, { ariaLabelledBy: 'modal-basic-title' });
+
+    modalRef.result.then(
+      (result: any) => {
+        this.closeResult = `Closed with: ${result}`;
+      },
+      (reason: any) => {
+        this.closeResult = `Dismissed ${this.getDismissReason(reason)}`;
+      }
+    );
+  }
 
 
   imageUrls: string[] = []
@@ -59,45 +78,95 @@ export class PostAdminComponent implements OnInit {
   }
 
   getAllPosts() {
-    this.postService.getAllPosts().subscribe(res => this.listPosts = res);
+    // @ts-ignore
+    this.postService.getAllPosts().subscribe((res: Post[]) => {
+      this.listPosts = res;
+      this.listPosts.forEach((post: Post) => {
+        // @ts-ignore
+        this.postService.getPostComments(post.postId).subscribe((comments: ForumComments[]) => {
+          this.comments[post.postId] = comments;
+        });
+      });
+    });
   }
+
 
   addPost(post: Post, imageInput: HTMLInputElement) {
     const formData = new FormData();
+    const newPost: Post = { ...post }; // Create a copy of the post object
 
-    // Append the post data to the form data
-    formData.append('post', JSON.stringify(post));
+    // Assign values from the form to the newPost object
+    newPost.title = post.title;
+    newPost.description = post.description;
+    newPost.date = post.date;
+
+    // Append the newPost object to the form data
+    formData.append('post', JSON.stringify(newPost));
 
     // Check if a file is selected
     if (imageInput.files && imageInput.files.length > 0) {
       const file: File = imageInput.files[0];
-
-      const reader = new FileReader();
-      reader.onload = (event: any) => {
-        const base64Image = event.target.result;
-        formData.append('mediaContent', base64Image);
-        this.postService.addPost(formData).subscribe(() => {
-          this.getAllPosts();
-          this.form = false;
-        });
-      };
-      reader.readAsDataURL(file);
-    } else {
-      this.postService.addPost(formData).subscribe(() => {
-        this.getAllPosts();
-        this.form = false;
-      });
+      formData.append('mediaContent', file, file.name);
     }
+
+    this.postService.addPost(formData).subscribe(
+      (response: any) => {
+        // Post added successfully, handle the response as needed
+        console.log('Post added:', response);
+
+        // Reset the form and reload the posts
+        this.post = new Post();
+        this.getAllPosts();
+      },
+      (error: any) => {
+        // Handle the error case
+        console.error('Error adding post:', error);
+        // Optionally display an error message to the user
+      }
+    );
   }
 
+  // Add the logic to add a comment to a post
+  addComment(postId: number) {
+    // Create a new comment object
+    const comment = {
+      postId: postId,
+      content: this.newComment.content
+    };
 
+    // Call the service method to add the comment
+    this.postService.addComment(comment).subscribe(
+      (response: any) => {
+        // Comment added successfully, handle the response as needed
+        console.log('Comment added:', response);
+
+        // Clear the new comment input field
+        this.newComment.content = '';
+
+        // Refresh the comments for the post
+        this.refreshPostComments(postId);
+      },
+      (error: any) => {
+        // Handle the error case
+        console.error('Error adding comment:', error);
+        // Optionally display an error message to the user
+      }
+    );
+  }
+
+  refreshPostComments(postId: number) {
+    // @ts-ignore
+    this.postService.getPostComments(postId).subscribe((comments: ForumComments[]) => {
+      this.comments[postId] = comments;
+    });
+  }
 
   updatePost(post: Post) {
     this.postService.updatePost(post).subscribe();
   }
 
-  deletePost(idPost: any) {
-    this.postService.deletePost(idPost).subscribe(() => this.getAllPosts());
+  deletePost(postId: any) {
+    this.postService.deletePost(postId).subscribe(() => this.getAllPosts());
   }
 
 

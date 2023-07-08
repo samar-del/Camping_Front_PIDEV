@@ -1,0 +1,48 @@
+<div class="container">
+  <div class="table-responsive">
+    <table class="table table-bordered">
+      <thead>
+        <th scope="col">Content</th>
+        <th scope="col">Date</th>
+        <th class="text-center" scope="col">Actions</th>
+      </thead>
+      <tbody>
+      <tr *ngFor="let comment of listComments; let i = index">
+        <th scope="row">{{ comment.idComment }}</th>
+        <td>{{ comment.content }}</td>
+        <td>{{ comment.datePosted }}</td>
+        <td class="text-center">
+          <button type="button" class="btn btn-round btn-sm btn-success" (click)="open(mymodal)">edit</button>
+      <ng-template #mymodal let-modal>
+        <div class="modal-header">
+          <h4 class="modal-title" id="modal-basic-title">Edit</h4>
+          <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+            <span aria-hidden="true" (click)="cancel()">×</span>
+          </button>
+        </div>
+        <div>
+          <form>
+            <div class="modal-body">
+              <div class="row col-md-5">
+                <input type="number" [(ngModel)]="comment.idComment" [ngModelOptions]="{ standalone: true }" hidden>
+              </div>
+              <div class="row col-md-5">
+                <label>Titre</label>
+                <input type="text" [(ngModel)]="comment.content" [ngModelOptions]="{ standalone: true }">
+              </div>
+              <div class="row col-md-5">
+                <label>Date</label>
+                <input type="date" [(ngModel)]="comment.datePosted" [ngModelOptions]="{ standalone: true }">
+              </div>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-info" (click)="modal.close('Save click')" (click)="cancel()">Cancel</button>
+              <button class="btn btn-success" (click)="editComment(comment)" (click)="modal.close('Save click')">Confirm</button>
+            </div>
+          </form>
+        </div>
+      </ng-template>
+      </tbody>
+    </table>
+  </div>
+</div>

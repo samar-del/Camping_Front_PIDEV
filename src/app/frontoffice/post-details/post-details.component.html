@@ -1,0 +1,22 @@
+<div class="container">
+  <h2>Post Details</h2>
+
+  <div class="card">
+    <div *ngIf="post">
+    <div class="card-body">
+      <h5 class="card-title">{{ post.title }}</h5>
+      <p class="card-text">{{ post.description }}</p>
+    </div>
+    <ul class="list-group list-group-flush">
+      <li class="list-group-item">Date: {{ post.date }}</li>
+      <!-- Add more details as needed -->
+    </ul>
+      <h5>Comments</h5>
+      <app-comment-section [postId]="postId"></app-comment-section>
+    </div>
+  </div>
+
+  <br>
+
+
+</div>
